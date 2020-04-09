@@ -1,4 +1,4 @@
-package com.mmt.myowndoubanspringboot.demo.controller;
+package com.mmt.myowndoubanspringboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
