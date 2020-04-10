@@ -114,7 +114,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.mmt.myowndoubanspringboot.model.Movie">
-    insert into movie
+    REPLACE into movie
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,

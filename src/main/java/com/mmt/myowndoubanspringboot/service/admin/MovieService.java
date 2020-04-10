@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class AdminMovieService {
+public class MovieService {
     @Autowired
     MovieMapper movieMapper;
     @Autowired
@@ -39,5 +39,9 @@ public class AdminMovieService {
         movieWriterMapper.addMW(mid, writers);
         movieCastMapper.addMA(mid, actors);
         return true;
+    }
+
+    public List<Movie> getAllMovie() {
+        return movieMapper.selectByExample(new MovieExample());
     }
 }

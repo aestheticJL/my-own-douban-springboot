@@ -179,7 +179,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
     <insert id="addWriters">
-      REPLACE  into writer(id,image,name) values
+      REPLACE into writer(id,image,name) values
       <foreach collection="writers" item="writer" separator=",">
         (#{writer.id,jdbcType=INTEGER},#{writer.image,jdbcType=VARCHAR},#{writer.name,jdbcType=VARCHAR})
       </foreach>
