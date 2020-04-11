@@ -179,7 +179,7 @@
   <insert id="addMW">
     insert into movie_writer(mid,wid) values
     <foreach collection="writers" separator="," item="writer">
-      (#{mid},#{writer.id,jdbcType=INTEGER})
+      (#{mid},#{writer.id})
     </foreach>
   </insert>
 </mapper>

@@ -6,7 +6,7 @@ import com.mmt.myowndoubanspringboot.model.MovieActorExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface MovieCastMapper {
+public interface MovieActorMapper {
     long countByExample(MovieActorExample example);
 
     int deleteByExample(MovieActorExample example);

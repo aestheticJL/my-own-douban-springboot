@@ -183,7 +183,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
     <insert id="addDirectors">
-        REPLACE into director(id,image,name) values
+        insert ignore into director(id,image,name) values
         <foreach collection="directors" item="director" separator=",">
             (#{director.id,jdbcType=INTEGER},#{director.image,jdbcType=VARCHAR},#{director.name,jdbcType=VARCHAR})
         </foreach>

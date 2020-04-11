@@ -183,7 +183,7 @@
     <delete id="addMD">
         insert into movie_director(mid,did) values
         <foreach collection="directors" separator="," item="director">
-            (#{mid},#{director.id,jdbcType=INTEGER})
+            (#{mid},#{director.id})
         </foreach>
     </delete>
 </mapper>

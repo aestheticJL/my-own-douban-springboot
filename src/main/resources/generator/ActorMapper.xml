@@ -182,8 +182,8 @@
       name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <insert id="addCasts">
-        REPLACE into actor(id,image,name) values
+    <insert id="addActors">
+        insert ignore into actor(id,image,name) values
         <foreach collection="actors" item="actor" separator=",">
             (#{actor.id,jdbcType=INTEGER},#{actor.image,jdbcType=VARCHAR},#{actor.name,jdbcType=VARCHAR})
         </foreach>

@@ -28,5 +28,5 @@ public interface ActorMapper {
 
     int updateByPrimaryKey(Actor record);
 
-    int addCasts(@Param("actors") List<Actor> actors);
+    int addActors(@Param("actors") List<Actor> actors);
 }

@@ -23,7 +23,7 @@ public class MovieService {
     @Autowired
     MovieWriterMapper movieWriterMapper;
     @Autowired
-    MovieCastMapper movieCastMapper;
+    MovieActorMapper movieActorMapper;
 
     @Transactional
     public boolean addMovieInf(Movie movie) {
@@ -33,15 +33,33 @@ public class MovieService {
         List<Actor> actors = movie.getActors();
         directorMapper.addDirectors(directors);
         writerMapper.addWriters(writers);
-        actorMapper.addCasts(actors);
+        actorMapper.addActors(actors);
         Integer mid = movie.getId();
         movieDirectorMapper.addMD(mid, directors);
         movieWriterMapper.addMW(mid, writers);
-        movieCastMapper.addMA(mid, actors);
+        movieActorMapper.addMA(mid, actors);
         return true;
     }
 
     public List<Movie> getAllMovie() {
         return movieMapper.selectByExample(new MovieExample());
+    }
+
+    public Movie getMovieById(Integer id) {
+        return movieMapper.selectByPrimaryKey(id);
+    }
+
+    public boolean deleteMovie(Integer id) {
+        MovieActorExample movieActorExample = new MovieActorExample();
+        movieActorExample.createCriteria().andMidEqualTo(id);
+        movieActorMapper.deleteByExample(movieActorExample);
+        MovieWriterExample movieWriterExample = new MovieWriterExample();
+        movieWriterExample.createCriteria().andMidEqualTo(id);
+        movieWriterMapper.deleteByExample(movieWriterExample);
+        MovieDirectorExample movieDirectorExample = new MovieDirectorExample();
+        movieDirectorExample.createCriteria().andMidEqualTo(id);
+        movieDirectorMapper.deleteByExample(movieDirectorExample);
+        movieMapper.deleteByPrimaryKey(id);
+        return true;
     }
 }
