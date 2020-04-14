@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class MovieService {
+public class AdminMovieService {
     @Autowired
     MovieMapper movieMapper;
     @Autowired

@@ -47,6 +47,6 @@
         </javaClientGenerator>
 
         <!-- 配置表信息 -->
-        <table tableName="movie" domainObjectName="Movie"></table>
+        <table tableName="comment" domainObjectName="Comment"></table>
     </context>
 </generatorConfiguration>
