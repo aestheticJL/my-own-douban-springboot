@@ -1,7 +1,5 @@
 package com.mmt.myowndoubanspringboot.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class Comment {
@@ -13,7 +11,7 @@ public class Comment {
 
     private Date createTime;
 
-    private String myScore;
+    private Integer myScore;
 
     private String content;
 
@@ -49,12 +47,12 @@ public class Comment {
         this.createTime = createTime;
     }
 
-    public String getMyScore() {
+    public Integer getMyScore() {
         return myScore;
     }
 
-    public void setMyScore(String myScore) {
-        this.myScore = myScore == null ? null : myScore.trim();
+    public void setMyScore(Integer myScore) {
+        this.myScore = myScore;
     }
 
     public String getContent() {
