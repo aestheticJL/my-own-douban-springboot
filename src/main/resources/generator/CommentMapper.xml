@@ -1,273 +1,284 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mmt.myowndoubanspringboot.mapper.CommentMapper">
-  <resultMap id="BaseResultMap" type="com.mmt.myowndoubanspringboot.model.Comment">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="mid" jdbcType="INTEGER" property="mid" />
-    <result column="commentTitle" jdbcType="VARCHAR" property="commentTitle" />
-    <result column="createTime" jdbcType="DATE" property="createTime" />
-    <result column="myScore" jdbcType="VARCHAR" property="myScore" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mmt.myowndoubanspringboot.model.Comment">
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.mmt.myowndoubanspringboot.model.Comment">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="mid" jdbcType="INTEGER" property="mid"/>
+        <result column="commentTitle" jdbcType="VARCHAR" property="commentTitle"/>
+        <result column="createTime" jdbcType="DATE" property="createTime"/>
+        <result column="myScore" jdbcType="INTEGER" property="myScore"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mmt.myowndoubanspringboot.model.Comment">
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     id, mid, commentTitle, createTime, myScore
   </sql>
-  <sql id="Blob_Column_List">
+    <sql id="Blob_Column_List">
     content
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.mmt.myowndoubanspringboot.model.CommentExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from comment
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" parameterType="com.mmt.myowndoubanspringboot.model.CommentExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from comment
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from comment
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByExampleWithBLOBs" parameterType="com.mmt.myowndoubanspringboot.model.CommentExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.mmt.myowndoubanspringboot.model.CommentExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from comment
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from comment
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.mmt.myowndoubanspringboot.model.CommentExample">
-    delete from comment
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.mmt.myowndoubanspringboot.model.Comment">
+    <delete id="deleteByExample" parameterType="com.mmt.myowndoubanspringboot.model.CommentExample">
+        delete from comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.mmt.myowndoubanspringboot.model.Comment">
     insert into comment (id, mid, commentTitle, 
       createTime, myScore, content
       )
     values (#{id,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{commentTitle,jdbcType=VARCHAR},
-      #{createTime,jdbcType=DATE}, #{myScore,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      #{createTime,jdbcType=DATE}, #{myScore,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.mmt.myowndoubanspringboot.model.Comment">
-    replace into comment
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="mid != null">
-        mid,
-      </if>
-      <if test="commentTitle != null">
-        commentTitle,
-      </if>
-      <if test="createTime != null">
-        createTime,
-      </if>
-      <if test="myScore != null">
-        myScore,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="mid != null">
-        #{mid,jdbcType=INTEGER},
-      </if>
-      <if test="commentTitle != null">
-        #{commentTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=DATE},
-      </if>
-      <if test="myScore != null">
-        #{myScore,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.mmt.myowndoubanspringboot.model.CommentExample" resultType="java.lang.Long">
-    select count(*) from comment
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update comment
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.mid != null">
+    <insert id="insertSelective" parameterType="com.mmt.myowndoubanspringboot.model.Comment">
+        replace into comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="mid != null">
+                mid,
+            </if>
+            <if test="commentTitle != null">
+                commentTitle,
+            </if>
+            <if test="createTime != null">
+                createTime,
+            </if>
+            <if test="myScore != null">
+                myScore,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="mid != null">
+                #{mid,jdbcType=INTEGER},
+            </if>
+            <if test="commentTitle != null">
+                #{commentTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=DATE},
+            </if>
+            <if test="myScore != null">
+                #{myScore,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.mmt.myowndoubanspringboot.model.CommentExample"
+            resultType="java.lang.Long">
+        select count(*) from comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update comment
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.mid != null">
+                mid = #{record.mid,jdbcType=INTEGER},
+            </if>
+            <if test="record.commentTitle != null">
+                commentTitle = #{record.commentTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                createTime = #{record.createTime,jdbcType=DATE},
+            </if>
+            <if test="record.myScore != null">
+                myScore = #{record.myScore,jdbcType=INTEGER},
+            </if>
+            <if test="record.content != null">
+                content = #{record.content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update comment
+        set id = #{record.id,jdbcType=INTEGER},
         mid = #{record.mid,jdbcType=INTEGER},
-      </if>
-      <if test="record.commentTitle != null">
         commentTitle = #{record.commentTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createTime != null">
         createTime = #{record.createTime,jdbcType=DATE},
-      </if>
-      <if test="record.myScore != null">
-        myScore = #{record.myScore,jdbcType=VARCHAR},
-      </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update comment
-    set id = #{record.id,jdbcType=INTEGER},
-      mid = #{record.mid,jdbcType=INTEGER},
-      commentTitle = #{record.commentTitle,jdbcType=VARCHAR},
-      createTime = #{record.createTime,jdbcType=DATE},
-    myScore = #{record.myScore,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update comment
-    set id = #{record.id,jdbcType=INTEGER},
-      mid = #{record.mid,jdbcType=INTEGER},
-      commentTitle = #{record.commentTitle,jdbcType=VARCHAR},
-      createTime = #{record.createTime,jdbcType=DATE},
-    myScore = #{record.myScore,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mmt.myowndoubanspringboot.model.Comment">
-    update comment
-    <set>
-      <if test="mid != null">
-        mid = #{mid,jdbcType=INTEGER},
-      </if>
-      <if test="commentTitle != null">
-        commentTitle = #{commentTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        createTime = #{createTime,jdbcType=DATE},
-      </if>
-      <if test="myScore != null">
-        myScore = #{myScore,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mmt.myowndoubanspringboot.model.Comment">
+        myScore = #{record.myScore,jdbcType=INTEGER},
+        content = #{record.content,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update comment
+        set id = #{record.id,jdbcType=INTEGER},
+        mid = #{record.mid,jdbcType=INTEGER},
+        commentTitle = #{record.commentTitle,jdbcType=VARCHAR},
+        createTime = #{record.createTime,jdbcType=DATE},
+        myScore = #{record.myScore,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mmt.myowndoubanspringboot.model.Comment">
+        update comment
+        <set>
+            <if test="mid != null">
+                mid = #{mid,jdbcType=INTEGER},
+            </if>
+            <if test="commentTitle != null">
+                commentTitle = #{commentTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime,jdbcType=DATE},
+            </if>
+            <if test="myScore != null">
+                myScore = #{myScore,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mmt.myowndoubanspringboot.model.Comment">
     update comment
     set mid = #{mid,jdbcType=INTEGER},
       commentTitle = #{commentTitle,jdbcType=VARCHAR},
       createTime = #{createTime,jdbcType=DATE},
-      myScore = #{myScore,jdbcType=VARCHAR},
+      myScore = #{myScore,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mmt.myowndoubanspringboot.model.Comment">
+    <update id="updateByPrimaryKey" parameterType="com.mmt.myowndoubanspringboot.model.Comment">
     update comment
     set mid = #{mid,jdbcType=INTEGER},
       commentTitle = #{commentTitle,jdbcType=VARCHAR},
       createTime = #{createTime,jdbcType=DATE},
-      myScore = #{myScore,jdbcType=VARCHAR}
+      myScore = #{myScore,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
     <select id="getCommentByMid" resultMap="BaseResultMap">
-      select * from comment where mid = #{mid};
+    select * from comment where mid=#{mid,jdbcType=INTEGER}
+  </select>
+    <select id="getNewCommentMovieId" resultType="java.lang.Integer">
+        select mid from comment order by createTime limit 10
+    </select>
+    <select id="getMyHighScoreMovieId" resultType="java.lang.Integer">
+        select mid from comment order by myScore limit 10
     </select>
 </mapper>

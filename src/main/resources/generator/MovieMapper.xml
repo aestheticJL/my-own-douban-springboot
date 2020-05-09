@@ -315,4 +315,16 @@
             ON w.`id` = mw.`wid`
           WHERE m.`id` = #{id}
     </select>
+    <select id="getOtherMovie" resultMap="BaseResultMap">
+        select * from movie where countries not like '%中国%' and countries not like '%日本%' and countries not like '%韩国%'
+    </select>
+    <select id="getMovieByIDs" resultMap="BaseResultMap">
+        select * from movie where id in
+        <foreach collection="IDs" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+    <select id="getHighScoreMovie" resultMap="BaseResultMap">
+        select * from movie order by score desc limit 10
+    </select>
 </mapper>

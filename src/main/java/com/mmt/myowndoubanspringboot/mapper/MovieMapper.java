@@ -30,4 +30,10 @@ public interface MovieMapper {
     int updateByPrimaryKey(Movie record);
 
     Movie getMovieAllInfById(Integer id);
+
+    List<Movie> getOtherMovie();
+
+    List<Movie> getMovieByIDs(@Param("IDs") List<Integer> IDs);
+
+    List<Movie> getHighScoreMovie();
 }

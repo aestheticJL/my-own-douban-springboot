@@ -3,6 +3,8 @@ package com.mmt.myowndoubanspringboot.mapper;
 import com.mmt.myowndoubanspringboot.model.Comment;
 import com.mmt.myowndoubanspringboot.model.CommentExample;
 import java.util.List;
+
+import com.mmt.myowndoubanspringboot.model.Movie;
 import org.apache.ibatis.annotations.Param;
 
 public interface CommentMapper {
@@ -35,4 +37,8 @@ public interface CommentMapper {
     int updateByPrimaryKey(Comment record);
 
     Comment getCommentByMid(Integer mid);
+
+    List<Integer> getNewCommentMovieId();
+
+    List<Integer> getMyHighScoreMovieId();
 }

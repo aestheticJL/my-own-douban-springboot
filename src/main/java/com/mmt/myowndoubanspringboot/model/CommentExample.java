@@ -392,62 +392,52 @@ public class CommentExample {
             return (Criteria) this;
         }
 
-        public Criteria andMyscoreEqualTo(String value) {
+        public Criteria andMyscoreEqualTo(Integer value) {
             addCriterion("myScore =", value, "myscore");
             return (Criteria) this;
         }
 
-        public Criteria andMyscoreNotEqualTo(String value) {
+        public Criteria andMyscoreNotEqualTo(Integer value) {
             addCriterion("myScore <>", value, "myscore");
             return (Criteria) this;
         }
 
-        public Criteria andMyscoreGreaterThan(String value) {
+        public Criteria andMyscoreGreaterThan(Integer value) {
             addCriterion("myScore >", value, "myscore");
             return (Criteria) this;
         }
 
-        public Criteria andMyscoreGreaterThanOrEqualTo(String value) {
+        public Criteria andMyscoreGreaterThanOrEqualTo(Integer value) {
             addCriterion("myScore >=", value, "myscore");
             return (Criteria) this;
         }
 
-        public Criteria andMyscoreLessThan(String value) {
+        public Criteria andMyscoreLessThan(Integer value) {
             addCriterion("myScore <", value, "myscore");
             return (Criteria) this;
         }
 
-        public Criteria andMyscoreLessThanOrEqualTo(String value) {
+        public Criteria andMyscoreLessThanOrEqualTo(Integer value) {
             addCriterion("myScore <=", value, "myscore");
             return (Criteria) this;
         }
 
-        public Criteria andMyscoreLike(String value) {
-            addCriterion("myScore like", value, "myscore");
-            return (Criteria) this;
-        }
-
-        public Criteria andMyscoreNotLike(String value) {
-            addCriterion("myScore not like", value, "myscore");
-            return (Criteria) this;
-        }
-
-        public Criteria andMyscoreIn(List<String> values) {
+        public Criteria andMyscoreIn(List<Integer> values) {
             addCriterion("myScore in", values, "myscore");
             return (Criteria) this;
         }
 
-        public Criteria andMyscoreNotIn(List<String> values) {
+        public Criteria andMyscoreNotIn(List<Integer> values) {
             addCriterion("myScore not in", values, "myscore");
             return (Criteria) this;
         }
 
-        public Criteria andMyscoreBetween(String value1, String value2) {
+        public Criteria andMyscoreBetween(Integer value1, Integer value2) {
             addCriterion("myScore between", value1, value2, "myscore");
             return (Criteria) this;
         }
 
-        public Criteria andMyscoreNotBetween(String value1, String value2) {
+        public Criteria andMyscoreNotBetween(Integer value1, Integer value2) {
             addCriterion("myScore not between", value1, value2, "myscore");
             return (Criteria) this;
         }
