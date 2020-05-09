@@ -32,11 +32,12 @@ public class AdminMovieController {
     public Movie getMovieById(@PathVariable Integer id) {
         return adminMovieService.getMovieById(id);
     }
+
     @DeleteMapping("/{id}")
-    public RespBean deleteMovie(@PathVariable Integer id){
-        if (adminMovieService.deleteMovie(id)){
+    public RespBean deleteMovie(@PathVariable Integer id) {
+        if (adminMovieService.deleteMovie(id)) {
             return RespBean.ok("删除成功");
-        }else{
+        } else {
             return RespBean.error("删除失败");
         }
     }

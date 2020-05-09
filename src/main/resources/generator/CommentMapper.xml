@@ -275,10 +275,13 @@
     <select id="getCommentByMid" resultMap="BaseResultMap">
     select * from comment where mid=#{mid,jdbcType=INTEGER}
   </select>
+<<<<<<< HEAD
     <select id="getNewCommentMovieId" resultType="java.lang.Integer">
         select mid from comment order by createTime limit 10
     </select>
     <select id="getMyHighScoreMovieId" resultType="java.lang.Integer">
         select mid from comment order by myScore limit 10
     </select>
+=======
+>>>>>>> 551b61595f9d55d6132cc02c402d499dc0c5e91e
 </mapper>
